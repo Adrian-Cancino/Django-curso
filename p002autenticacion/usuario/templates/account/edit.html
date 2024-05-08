@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Editar tu perfil{% endblock %}
+
+{% block content%}
+    <h1>Edita tu perfíl</h1>
+    <p>Puedes editar tu perfil usando el siguiente formulario</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Guardar cambios</button>
+    </form>
+{% endblock %}

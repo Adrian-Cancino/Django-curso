@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <h5 class="card-header">Iniciar sesión</h5>
+        <div class="card-body">
+          {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+              Tu usuario o contraseña están incorrectos. Intenta de nuevo por favor.
+            </div>
+          {% else %}
+            <p class="text-muted">Por favor, llena el formulario para iniciar sesión:</p>
+          {% endif %}
+          <form action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              <div class="form-group mb-3">
+                <label for="{{ form.username.id_for_label }}">Usuario</label>
+                {{ form.username }}
+              </div>
+              <div class="form-group mb-3">
+                <label for="{{ form.password.id_for_label }}">Contraseña</label>
+                {{ form.password }}
+              </div>
+              <input type="hidden" name="next" value="{{ next }}" />
+              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+          </form>
+          <p>
+            <a href="{% url 'password_reset' %}">
+              ¿Olvidaste tu contraseña?
+            </a>
+          </p>
+          <p>
+            <a href="{% url 'register' %}">
+              Registrate aquí
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
